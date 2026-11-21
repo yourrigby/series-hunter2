@@ -122,7 +122,7 @@ body.has-bar .app { padding-bottom: 120px; }
 .btn:active:not(:disabled) { transform: scale(.98); }
 .btn:disabled { opacity: .4; cursor: not-allowed; }
 .btn.soft { background: var(--soft-bg); color: var(--soft-fg); box-shadow: inset 0 0 0 1px var(--glass-line); }
-.intro { text-align: center; padding-top: 22px; }
+.intro { text-align: center; }
 .orbit { --w: min(76vw, 300px); position: relative; width: var(--w); height: var(--w); margin: 0 auto; }
 .halo { position: absolute; inset: 16%; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,120,.55), transparent 68%); }
 .orbit::before { content: ""; position: absolute; inset: 7%; border-radius: 50%; border: 1px solid var(--glass-line); }
@@ -133,7 +133,7 @@ body.has-bar .app { padding-bottom: 120px; }
 .core { position: absolute; left: 50%; top: 50%; width: 30%; height: 30%; transform: translate(-50%, -50%); border-radius: 32%; display: grid; place-items: center; font-size: calc(var(--w) * .14); background: var(--glass); border: 1px solid var(--glass-line); box-shadow: 0 16px 36px -12px rgba(232,69,126,.55), inset 0 1px 0 var(--glass-hi); }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes spin-r { to { transform: rotate(-360deg); } }
-.intro h1 { margin-top: 26px; font-size: clamp(2rem, 8.6vw, 2.7rem); line-height: 1.04; letter-spacing: -.04em; font-weight: 700; color: var(--head); text-wrap: balance; }
+.intro h1 { margin-top: 0; font-size: clamp(2rem, 8.6vw, 2.7rem); line-height: 1.04; letter-spacing: -.04em; font-weight: 700; color: var(--head); text-wrap: balance; }
 .lead { margin-top: 14px; color: var(--muted); font-size: 1.04rem; max-width: 46ch; margin-inline: auto; }
 .facts { margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .pill { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: var(--pill); border: 1px solid var(--pill-line); color: var(--text); font-size: .82rem; line-height: 1.3; }
@@ -177,16 +177,13 @@ body.has-bar .app { padding-bottom: 120px; }
 .best { font-size: .8rem; color: var(--muted); }
 .gauge { margin-top: 18px; display: flex; align-items: center; gap: 16px; }
 .gring { --s: 92px; flex: none; width: var(--s); height: var(--s); border-radius: 50%; display: grid; place-items: center; position: relative;
-  background: conic-gradient(from 0deg, #FF9A6B, #E8457E calc(var(--p) * 1%), var(--track) 0); }
-.gring::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--ring-hole, #fff); }
+  background: none; }
+.gring-svg { position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none; }
+.gring-track { stroke:var(--track); }
 .gring span { position: relative; font-weight: 700; font-size: 1.5rem; letter-spacing: -.03em; }
 .gring small { font-size: .7em; font-weight: 600; }
 .gring.sm { --s: 60px; }
-.gring.sm::before { inset: 5px; }
 .gring.sm span { font-size: 1.02rem; }
-:root { --ring-hole: #FFFFFF; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ring-hole: #1B1220; } }
-:root[data-theme="dark"] { --ring-hole: #1B1220; }
 .gt h3, .ct h3 { font-size: 1.35rem; line-height: 1.12; letter-spacing: -.025em; font-weight: 650; color: var(--head); }
 .ru { display: block; margin-top: 3px; font-size: .92rem; font-weight: 400; color: var(--muted); letter-spacing: 0; }
 .pitch { margin-top: 14px; }
@@ -226,7 +223,6 @@ h1, h2, h3, .q, .arch, .btn, .go, .ot, .chip, .tag, .thumb, .lvl, .big, .cap, .g
 .sq { display: inline-block; flex: none; width: 64px; height: 64px; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M100.00 50.00 L99.97 65.36 L99.89 70.26 L99.75 73.81 L99.56 76.68 L99.31 79.12 L99.01 81.26 L98.64 83.17 L98.22 84.89 L97.74 86.46 L97.20 87.89 L96.60 89.21 L95.94 90.43 L95.20 91.54 L94.40 92.58 L93.53 93.53 L92.58 94.40 L91.54 95.20 L90.43 95.94 L89.21 96.60 L87.89 97.20 L86.46 97.74 L84.89 98.22 L83.17 98.64 L81.26 99.01 L79.12 99.31 L76.68 99.56 L73.81 99.75 L70.26 99.89 L65.36 99.97 L50.00 100.00 L34.64 99.97 L29.74 99.89 L26.19 99.75 L23.32 99.56 L20.88 99.31 L18.74 99.01 L16.83 98.64 L15.11 98.22 L13.54 97.74 L12.11 97.20 L10.79 96.60 L9.57 95.94 L8.46 95.20 L7.42 94.40 L6.47 93.53 L5.60 92.58 L4.80 91.54 L4.06 90.43 L3.40 89.21 L2.80 87.89 L2.26 86.46 L1.78 84.89 L1.36 83.17 L0.99 81.26 L0.69 79.12 L0.44 76.68 L0.25 73.81 L0.11 70.26 L0.03 65.36 L0.00 50.00 L0.03 34.64 L0.11 29.74 L0.25 26.19 L0.44 23.32 L0.69 20.88 L0.99 18.74 L1.36 16.83 L1.78 15.11 L2.26 13.54 L2.80 12.11 L3.40 10.79 L4.06 9.57 L4.80 8.46 L5.60 7.42 L6.47 6.47 L7.42 5.60 L8.46 4.80 L9.57 4.06 L10.79 3.40 L12.11 2.80 L13.54 2.26 L15.11 1.78 L16.83 1.36 L18.74 0.99 L20.88 0.69 L23.32 0.44 L26.19 0.25 L29.74 0.11 L34.64 0.03 L50.00 0.00 L65.36 0.03 L70.26 0.11 L73.81 0.25 L76.68 0.44 L79.12 0.69 L81.26 0.99 L83.17 1.36 L84.89 1.78 L86.46 2.26 L87.89 2.80 L89.21 3.40 L90.43 4.06 L91.54 4.80 L92.58 5.60 L93.53 6.47 L94.40 7.42 L95.20 8.46 L95.94 9.57 L96.60 10.79 L97.20 12.11 L97.74 13.54 L98.22 15.11 L98.64 16.83 L99.01 18.74 L99.31 20.88 L99.56 23.32 L99.75 26.19 L99.89 29.74 L99.97 34.64 L100.00 50.00Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M100.00 50.00 L99.97 65.36 L99.89 70.26 L99.75 73.81 L99.56 76.68 L99.31 79.12 L99.01 81.26 L98.64 83.17 L98.22 84.89 L97.74 86.46 L97.20 87.89 L96.60 89.21 L95.94 90.43 L95.20 91.54 L94.40 92.58 L93.53 93.53 L92.58 94.40 L91.54 95.20 L90.43 95.94 L89.21 96.60 L87.89 97.20 L86.46 97.74 L84.89 98.22 L83.17 98.64 L81.26 99.01 L79.12 99.31 L76.68 99.56 L73.81 99.75 L70.26 99.89 L65.36 99.97 L50.00 100.00 L34.64 99.97 L29.74 99.89 L26.19 99.75 L23.32 99.56 L20.88 99.31 L18.74 99.01 L16.83 98.64 L15.11 98.22 L13.54 97.74 L12.11 97.20 L10.79 96.60 L9.57 95.94 L8.46 95.20 L7.42 94.40 L6.47 93.53 L5.60 92.58 L4.80 91.54 L4.06 90.43 L3.40 89.21 L2.80 87.89 L2.26 86.46 L1.78 84.89 L1.36 83.17 L0.99 81.26 L0.69 79.12 L0.44 76.68 L0.25 73.81 L0.11 70.26 L0.03 65.36 L0.00 50.00 L0.03 34.64 L0.11 29.74 L0.25 26.19 L0.44 23.32 L0.69 20.88 L0.99 18.74 L1.36 16.83 L1.78 15.11 L2.26 13.54 L2.80 12.11 L3.40 10.79 L4.06 9.57 L4.80 8.46 L5.60 7.42 L6.47 6.47 L7.42 5.60 L8.46 4.80 L9.57 4.06 L10.79 3.40 L12.11 2.80 L13.54 2.26 L15.11 1.78 L16.83 1.36 L18.74 0.99 L20.88 0.69 L23.32 0.44 L26.19 0.25 L29.74 0.11 L34.64 0.03 L50.00 0.00 L65.36 0.03 L70.26 0.11 L73.81 0.25 L76.68 0.44 L79.12 0.69 L81.26 0.99 L83.17 1.36 L84.89 1.78 L86.46 2.26 L87.89 2.80 L89.21 3.40 L90.43 4.06 L91.54 4.80 L92.58 5.60 L93.53 6.47 L94.40 7.42 L95.20 8.46 L95.94 9.57 L96.60 10.79 L97.20 12.11 L97.74 13.54 L98.22 15.11 L98.64 16.83 L99.01 18.74 L99.31 20.88 L99.56 23.32 L99.75 26.19 L99.89 29.74 L99.97 34.64 L100.00 50.00Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; background: #000; }
 .sq img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .sq.xs { width: 18px; height: 18px; }
-.sq.lg { width: 74px; height: 74px; transform: rotate(var(--r)) translateY(var(--y)); filter: drop-shadow(0 14px 22px rgba(0,0,0,.45)); }
 .plat { gap: 7px; padding-left: 6px; }
 .svcs { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .svcbtn { position: relative; display: grid; justify-items: center; gap: 10px; padding: 18px 8px 14px; border-radius: 26px; background: var(--opt); border: 1px solid var(--opt-line); transition: background .18s, border-color .18s, transform .12s; }
@@ -238,8 +234,6 @@ h1, h2, h3, .q, .arch, .btn, .go, .ot, .chip, .tag, .thumb, .lvl, .big, .cap, .g
 .badge { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--btn-bg); color: var(--btn-fg); opacity: 0; transform: scale(.5); transition: opacity .18s, transform .22s cubic-bezier(.3,1.6,.5,1); }
 .badge .chk { opacity: 1; transform: none; width: 16px; height: 16px; }
 .svcbtn[aria-pressed="true"] .badge { opacity: 1; transform: none; }
-.intro { margin-top: min(36vh, 320px); padding-top: 0; overflow: visible; }
-.icons { display: flex; justify-content: center; gap: 14px; margin-top: -42px; }
 .orbwrap.lit .orb { opacity: 1; filter: none; }
 .ripple { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255,140,185,.75); box-shadow: 0 0 24px rgba(242,90,154,.45); transform: scale(calc(var(--s) * .72)); opacity: .95; animation: ripple .85s cubic-bezier(.2,.7,.3,1) forwards; pointer-events: none; }
 @keyframes ripple { to { transform: scale(calc(var(--s) * 1.28)); opacity: 0; } }
@@ -440,7 +434,7 @@ body {isolation:isolate;}
 .avatar-topline span:first-child {display:none;}
 .avatar-art img {width:min(100%,355px);object-position:center;}
 body.scale-question .app {width:100%;max-width:530px;padding:0 clamp(12px,4vw,22px) calc(118px + env(safe-area-inset-bottom,0px));min-height:100svh;}
-.ref-scale-screen {min-height:calc(100svh - 115px);width:100%;padding:clamp(18px,4vh,34px) 0 175px;overflow:hidden;display:flex;flex-direction:column;align-items:center;}
+.ref-scale-screen {min-height:calc(100svh - 115px);width:100%;padding:clamp(18px,4vh,34px) 0 175px;overflow:visible;display:flex;flex-direction:column;align-items:center;}
 .ref-scale-top {width:100%;}
 .ref-scale-back {width:46px;height:46px;}
 .ref-scale-heading {margin:clamp(24px,6.2vh,52px) auto 0;width:100%;max-width:460px;text-align:center;}
@@ -549,11 +543,9 @@ body.scale-question .btn:disabled {opacity:.6;}
 .result .card .fic {color:#fff;background:rgba(255,255,255,.12);}
 .result .card .pill {color:#26122c;text-shadow:none;}
 .result .rcard .ru,.result .rcard .pitch,.result .rcard .why2 {color:#fff;}
-.intro {margin-top:clamp(100px,21vh,220px);}
 .gring small {font-size:12px;}
 .ref-ruler {mask-image:linear-gradient(90deg,transparent,black 9%,black 91%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,black 9%,black 91%,transparent);}
 .ref-ruler-ticks {mask-image:none!important;-webkit-mask-image:none!important;}
-@media(max-height:650px){.intro {margin-top:clamp(45px,11vh,75px);}}
 @media(max-height:640px){.scale-mountain{height:44px;margin-top:0;margin-bottom:0;}.ref-scale-middle{margin-top:6px;}.ref-scale-heading h2{font-size:clamp(1.45rem,5vw,2rem);}.ref-scale-hint{margin-top:8px;}}
 :root{--fh:"Vela Sans","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;--veil:none !important;--glass:linear-gradient(180deg, rgba(36,20,33,.30), rgba(18,12,22,.42)) !important;--glass-line:rgba(255,255,255,.06) !important;--glass-hi:rgba(255,255,255,.12) !important;--shadow:0 24px 80px rgba(8,6,14,.24) !important;}
 .bg{background-blend-mode:normal !important;}
@@ -644,15 +636,11 @@ body.wide .bg{filter:blur(8px) brightness(.77) saturate(1.08);transform:scale(1.
 .sheet .head{padding:0 2px;}
 .sheet .tag{font-size:13px;}
 .q,.intro h1,.arch,.ref-scale-heading h2,.fact-slide .fv,.sect{letter-spacing:-.027em !important;}
-.intro{padding-top:clamp(35px,7vh,78px);}
-.intro h1{margin-top:22px;letter-spacing:-.035em!important;}
+.intro h1{letter-spacing:-.035em!important;}
 .intro-subtitle{font-size:clamp(14px,3.55vw,16px) !important;line-height:1.52!important;max-width:38ch!important;color:#eee1ea!important;font-weight:420!important;}
 .intro .facts{gap:8px;margin-top:22px;}
 .intro .pill{padding:10px 13px!important;border-radius:999px;color:#fff!important;font-size:12px!important;font-weight:500;}
 .intro .fine{font-size:12px;line-height:1.5;color:#ded0df!important;}
-.icons{margin-top:0!important;display:flex;align-items:center;justify-content:center;gap:12px;overflow:visible;min-height:78px;}
-.icons .sq.lg{box-sizing:border-box;width:70px;height:70px;margin:0;transform:none!important;filter:drop-shadow(0 8px 14px rgba(0,0,0,.2));background:rgba(25,15,28,.27)!important;border-radius:20px;padding:8px;mask:none!important;-webkit-mask:none!important;overflow:visible;}
-.icons .sq img{width:100%;height:100%;object-fit:contain;border-radius:10px;}
 .sq,.emo,.badge,.fic,.opt .emo{background:transparent!important;box-shadow:none!important;}
 .emo{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;line-height:1;font-size:1.55rem;}
 .opts{margin-top:26px;gap:13px;}
@@ -681,7 +669,7 @@ body.scale-question .ref-ruler{background:none;border:0;box-shadow:none;}
 .wave-wheel{width:min(100%,460px);height:134px;display:flex;align-items:flex-end;position:relative;margin-top:12px!important;overflow:visible;touch-action:none;cursor:ew-resize;user-select:none;-webkit-user-select:none;}
 .wave-wheel-bars{display:flex;align-items:flex-end;justify-content:space-between;width:100%;height:110px;gap:3px;pointer-events:none;padding-bottom:16px;}
 .wave-bar{flex:1 1 1px;display:block;max-width:4px;height:6px;background-color:rgba(239,231,246,.32);border-radius:99px;box-shadow:0 0 7px rgba(230,90,218,.08);will-change:height,background-color;}
-.wave-thumb{position:absolute;bottom:-15px;left:var(--progress,50%);width:23px;height:23px;border-radius:50%;transform:translateX(-50%);background:#ec8ddd;box-shadow:0 0 0 5px rgba(229,101,205,.10),0 0 15px rgba(253,171,242,.43);pointer-events:none;transition:left .08s linear;}
+.wave-thumb{position:absolute;bottom:-15px;left:var(--progress,50%);width:23px;height:23px;border-radius:50%;transform:translateX(-50%);background:#ec8ddd;box-shadow:0 0 0 5px rgba(229,101,205,.10),0 0 15px rgba(253,171,242,.43);pointer-events:none;transition:none;}
 .wave-wheel #scaleRuler{opacity:0!important;pointer-events:none;position:absolute;inset:0;width:100%;height:100%;border:0;}
 .wave-wheel:focus-within{outline:2px solid rgba(255,216,253,.8);outline-offset:12px;border-radius:12px;}
 .ref-scale-middle{min-height:280px;}
@@ -718,11 +706,8 @@ body.ff-revealing .result{animation:ff-focussing 2.6s cubic-bezier(.18,.65,.18,1
 .rcard .go{background:#2d1538!important;border:none!important;}
 @media(max-width:480px){
  .sheet{padding:24px 18px 102px;}
- .intro{padding-top:clamp(22px,5vh,55px);}
  .intro-subtitle{font-size:14px!important;}
  .intro .pill{font-size:12px!important;}
- .icons{gap:10px;}
- .icons .sq.lg{width:62px;height:62px;padding:7px;}
  .q{font-size:clamp(27px,7vw,36px);line-height:1.14;}
  .chip-tab{font-size:13px!important;}
  .chips{max-height:min(45svh,310px);}
@@ -732,7 +717,7 @@ body.ff-revealing .result{animation:ff-focussing 2.6s cubic-bezier(.18,.65,.18,1
  .profile-story{padding:24px 20px;}
  .facts-slider{grid-auto-columns:91%;}
 }
-@media(max-width:350px){.chips{grid-template-columns:repeat(2,minmax(0,1fr));}.chip{padding:9px!important;font-size:12px!important;}.chip-title{font-size:12px}.icons .sq.lg{width:56px;height:56px}.intro .facts{gap:5px}.intro .pill{padding:8px!important}}
+@media(max-width:350px){.chips{grid-template-columns:repeat(2,minmax(0,1fr));}.chip{padding:9px!important;font-size:12px!important;}.chip-title{font-size:12px}.intro .facts{gap:5px}.intro .pill{padding:8px!important}}
 @media(max-height:650px){.wave-wheel{height:87px}.wave-wheel-bars{height:80px}.ref-scale-middle{min-height:205px}.ref-scale-heading{margin-top:8px}.ref-scale-value{font-size:4.3rem}.ref-scale-caption{margin-bottom:8px}.ref-scale-endpoints{margin-top:14px!important}}
 @media(prefers-reduced-motion:reduce){.wave-thumb,.wave-bar,.ff-wave-rim,.ff-wave-sparkles,.ff-wave-old{transition:none!important;animation:none!important}body.ff-revealing .result{animation:none!important}}
 .chip-tab,.chip-tab.is-on { -webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important; }
@@ -1203,22 +1188,11 @@ body.wide .taste-details summary {
   text-underline-offset:4px;
   text-decoration-color:rgba(255,255,255,.38);
 }
-:root { --ff-card-shape:superellipse(2.4); }
-@supports (corner-shape: squircle) {
- .sheet,.card,.opt,.svcbtn,.chip,.chip-tab,.search,.avatar-tile,.profile-story,
- .fact-slide,.rcard,.anti,.end,.btn,.go,.switch,.persona-secondary,.round,
- .taste-details summary,.pill,.plat,.ref-scale-back {corner-shape:var(--ff-card-shape) !important;}
-}
-.sheet,.card,.avatar-tile,.profile-story,.fact-slide,.rcard,.anti,.end {border-radius:clamp(25px,6vw,38px) !important;}
-.opt,.svcbtn,.chip,.search,.chip-tab,.taste-details summary {border-radius:23px !important;}
-.btn,.go,.switch {border-radius:22px !important;}
-.round {border-radius:18px !important;}
-.pill,.plat,.persona-secondary {border-radius:15px !important;}
 .mode,.mode span {letter-spacing:-.4px !important;}
 .ref-scale-caption {font-size:20px !important;letter-spacing:-.5px !important;line-height:1.3 !important;min-height:30px;}
 body.intro-screen .app {padding-bottom:32px !important;}
-body.intro-screen .intro {padding-bottom:clamp(28px,6vw,46px) !important;display:flex;flex-direction:column;align-items:center;gap:0;}
-body.intro-screen .intro .bar.bar-intro {position:static !important;inset:auto !important;display:flex !important;align-self:stretch;pointer-events:auto;background:none !important;box-shadow:none !important;margin:24px 0 0;padding:0 !important;max-width:none;}
+body.intro-screen .intro {display:flex;flex-direction:column;align-items:center;gap:0;}
+body.intro-screen .intro .bar.bar-intro {position:static !important;inset:auto !important;display:flex !important;align-self:stretch;pointer-events:auto;background:none !important;box-shadow:none !important;margin:21px 0 0;padding:0 !important;max-width:none;}
 body.intro-screen .bar-intro .btn {max-width:none;height:56px;letter-spacing:-.4px;}
 body.intro-screen .intro .fine {margin-top:16px;}
 body.intro-screen.has-bar .app {padding-bottom:28px !important;}
@@ -1243,7 +1217,7 @@ body.wide .fact-slide::before,body.wide .rcard::before,
 body.wide .anti::before,body.wide .end::before {
  content:"" !important;display:block !important;position:absolute!important;
  inset:0;z-index:0;pointer-events:none;opacity:.78;
- border-radius:inherit;corner-shape:inherit;
+ border-radius:inherit;
  background:radial-gradient(ellipse 65% 74% at 0% 0%,rgba(255,152,113,.19),transparent 76%),
             radial-gradient(ellipse 68% 85% at 100% 12%,rgba(181,103,255,.18),transparent 75%),
             linear-gradient(135deg,rgba(255,255,255,.07),transparent 30%,rgba(215,144,244,.055) 92%);
@@ -1321,24 +1295,6 @@ body.wide .switch {
 
 @media(max-width:699px){body.wide .facts-slider{--fact-card-width:100% !important;gap:24px !important;}}
 
-/* FrameFinder v11: continuous superellipse geometry and answer-origin waves. */
-:root { --ff-card-shape:superellipse(5); }
-@supports (corner-shape:superellipse(5)) {
- .sheet,.card,.opt,.svcbtn,.chip,.chip-tab,.search,.avatar-tile,.profile-story,
- .fact-slide,.rcard,.anti,.end,.btn,.go,.switch,.persona-secondary,.round,
- .taste-details summary,.pill,.plat,.ref-scale-back {corner-shape:superellipse(5) !important;}
-}
-/* Increased large-surface radii by approximately 20% with graceful fallback. */
-.sheet,.card,.avatar-tile,.profile-story,.fact-slide,.rcard,.anti,.end {
- border-radius:clamp(34px,7.2vw,48px) !important;
-}
-.opt,.svcbtn,.chip,.search,.chip-tab,.taste-details summary {border-radius:28px !important;}
-.btn,.go,.switch {border-radius:27px !important;}
-.round {border-radius:22px !important;}
-.pill,.plat,.persona-secondary {border-radius:19px !important;}
-body.wide .rcard {border-radius:44px !important;}
-body.wide .fact-slide {border-radius:44px !important;}
-
 /* The avatar and viewer profile are the same optical glass as fact cards. */
 body.wide .avatar-tile,body.wide .profile-story,body.wide .fact-slide {
  background:var(--ff-result-glass) !important;
@@ -1349,7 +1305,7 @@ body.wide .avatar-tile,body.wide .profile-story,body.wide .fact-slide {
 }
 body.wide .avatar-tile::before,body.wide .profile-story::before,body.wide .fact-slide::before {
  inset:0 !important;opacity:.78 !important;
- border-radius:inherit !important;corner-shape:inherit;
+ border-radius:inherit !important;
  background:radial-gradient(ellipse 65% 74% at 0% 0%,rgba(255,152,113,.19),transparent 76%),
             radial-gradient(ellipse 68% 85% at 100% 12%,rgba(181,103,255,.18),transparent 75%),
             linear-gradient(135deg,rgba(255,255,255,.07),transparent 30%,rgba(215,144,244,.055) 92%) !important;
@@ -1418,7 +1374,7 @@ body.wide .fact-slide::before,body.wide .anti::before,body.wide .rcard::before,
 body.wide .end::before {
   content:""!important;display:block!important;position:absolute!important;
   inset:0!important;z-index:0!important;pointer-events:none!important;
-  opacity:.68!important;border-radius:inherit;corner-shape:inherit;
+  opacity:.68!important;border-radius:inherit;
   background:radial-gradient(ellipse 83% 65% at 4% 4%,rgba(255,180,125,.13),transparent 80%),
     radial-gradient(ellipse 75% 75% at 96% 5%,rgba(210,122,255,.14),transparent 78%),
     linear-gradient(156deg,rgba(255,255,255,.09),transparent 28%,rgba(255,191,242,.035) 90%)!important;
@@ -1540,7 +1496,7 @@ body.wide .viewer-flip-card {
  animation:ff-hang-settle 1.25s cubic-bezier(.18,.8,.18,1) backwards;
 }
 @keyframes ff-hang-settle {from{transform:rotate(-3deg)}45%{transform:rotate(2deg)}to{transform:rotate(0)}}
-body.wide .viewer-flip-card:focus-visible {outline:3px solid #f4cee9;outline-offset:8px;border-radius:42px;}
+body.wide .viewer-flip-card:focus-visible {outline:3px solid #f4cee9;outline-offset:8px;border-radius:40px;}
 body.wide .viewer-card-inner {
  display:block;position:absolute;inset:0;transform-style:preserve-3d;
  transition:transform 1.05s cubic-bezier(.2,.72,.16,1);
@@ -1550,7 +1506,7 @@ body.wide .viewer-face {
  position:absolute;inset:0;display:flex;flex-direction:column;
  align-items:center;justify-content:center;gap:12px;
  -webkit-backface-visibility:hidden;backface-visibility:hidden;overflow:hidden;
- border-radius:clamp(38px,8vw,58px);corner-shape:superellipse(3.2);
+ border-radius:clamp(38px,8vw,58px);
  padding:30px clamp(21px,6vw,36px);
  background:linear-gradient(153deg,rgba(148,69,119,.67),rgba(75,37,76,.83) 53%,rgba(113,54,87,.7));
  border:1px solid rgba(255,239,250,.28);
@@ -1649,71 +1605,24 @@ body.wide .result .ctrack .slide.is-next .rcard {
  backdrop-filter:blur(54px) saturate(145%)!important;
  box-shadow:0 24px 46px rgba(18,5,26,.27),inset 0 1px 0 rgba(255,255,255,.22)!important;
 }
-body.wide .result .ctrack .slide.is-prev .rcard > *,
-body.wide .result .ctrack .slide.is-next .rcard > * {opacity:0!important;}
+body.wide .result .ctrack .slide.is-prev .rcard > :not(.ff-smooth-surface),
+body.wide .result .ctrack .slide.is-next .rcard > :not(.ff-smooth-surface) {opacity:0!important;}
 body.wide .result .ctrack .slide.is-active .rcard {cursor:pointer;
  background:linear-gradient(153deg,rgba(118,68,102,.88),rgba(58,30,65,.94) 58%,rgba(83,41,77,.88)) !important;
  -webkit-backdrop-filter:blur(64px) saturate(168%)!important;
  backdrop-filter:blur(64px) saturate(168%)!important;
  box-shadow:0 25px 65px rgba(19,5,26,.38),inset 0 1px 0 rgba(255,255,255,.18)!important;
 }
-body.wide .result .ctrack .slide .rcard {border-radius:42px!important;corner-shape:superellipse(2.5)!important;}
-body.wide .result>.anti {border-radius:48px!important;corner-shape:superellipse(2.5)!important;}
-body.wide .facts-wrap .fact-slide.fact-editorial {border-radius:42px!important;corner-shape:superellipse(2.5)!important;}
+body.wide .result .ctrack .slide .rcard {border-radius:42px!important;}
+body.wide .result>.anti {border-radius:48px!important;}
+body.wide .facts-wrap .fact-slide.fact-editorial {border-radius:42px!important;}
 
-/* --- FrameFinder: 99px radius / true soft-squircle pass --- */
-:root{--ff-global-radius:99px;--ff-card-shape:superellipse(2.1);}
-/* All visible interaction surfaces share the same explicit 99px radius. */
-body .sheet, body .card, body .intro,
-body .opt,body .svcbtn,body .chip,body .chip-tab,body .search,
-body .avatar-tile,body .profile-story,body .fact-slide,
-body .rcard,body .anti,body .end,
-body .btn,body .go,body .switch,body .round,
-body .pill,body .plat,body .persona-secondary,
-body .tag,body .lvl,body .ta,
-body .taste-details summary,body .taste-details .meters,
-body .viewer-face,body .viewer-front-image,body .viewer-back-secondary,
-body .fact-caption,body .rbadge,
-body .icons .sq.lg,body .sheet .svcbtn .sq,
-body.wide .result .ctrack .slide .rcard,
-body.wide .result>.anti,
-body.wide .facts-wrap .fact-slide.fact-editorial,
-body.wide .viewer-front,body.wide .viewer-back,
-body .wave-wheel,body .ref-ruler,
-body .bar.bar-in-card .btn,
-body.intro-screen .intro.sheet {
-  border-radius:99px !important;
-}
-/* Override earlier superellipse(5), whose corners look square at small radii. */
-@supports (corner-shape:superellipse(2.1)) {
-  body .sheet,body .card,body .intro,
-  body .opt,body .svcbtn,body .chip,body .chip-tab,body .search,
-  body .avatar-tile,body .profile-story,body .fact-slide,
-  body .rcard,body .anti,body .end,
-  body .btn,body .go,body .switch,body .round,
-  body .pill,body .plat,body .persona-secondary,
-  body .tag,body .lvl,body .ta,
-  body .taste-details summary,body .taste-details .meters,
-  body .viewer-face,body .viewer-front-image,body .viewer-back-secondary,
-  body .fact-caption,body .rbadge,
-  body .icons .sq.lg,body .sheet .svcbtn .sq,
-  body.wide .result .ctrack .slide .rcard,
-  body.wide .result>.anti,
-  body.wide .facts-wrap .fact-slide.fact-editorial,
-  body.wide .viewer-front,body.wide .viewer-back,
-  body .wave-wheel,body .ref-ruler,
-  body .bar.bar-in-card .btn,
-  body.intro-screen .intro.sheet {
-    corner-shape:superellipse(2.1) !important;
-  }
-}
 /* Keep content within the curved silhouette, especially back navigation and cards. */
 body .sheet:not(.intro):not(.profile-story) {
   padding-top:clamp(50px,7vw,68px)!important;
   padding-bottom:clamp(38px,6vw,54px)!important;
 }
 body .sheet:not(.intro):not(.profile-story) .head {padding-inline:clamp(2px,1vw,10px);}
-body.intro-screen .intro.sheet {overflow:hidden!important;}
 body.wide .result .ctrack .slide .rcard {
   padding-top:clamp(44px,7vw,62px)!important;
   padding-bottom:clamp(40px,6vw,54px)!important;
@@ -1730,48 +1639,13 @@ body.wide .viewer-front-image {overflow:hidden;}
 /* Rounded overlays must share the same clipping geometry. */
 body .sheet::before,body .card::before,body .rcard::before,
 body .profile-story::before,body .fact-slide::before,
-body .viewer-face::after {border-radius:inherit!important;corner-shape:inherit;}
+body .viewer-face::after {border-radius:inherit!important;}
 @media(max-width:480px){
   body .sheet:not(.intro):not(.profile-story){padding-inline:clamp(22px,6vw,28px)!important;}
   body.wide .viewer-face {padding:34px 24px!important;}
   body.wide .facts-wrap .fact-slide.fact-editorial {min-height:350px!important;}
   body.wide .result .ctrack .slide .rcard {padding-inline:30px!important;}
 }
-
-/* Ensure even deeply nested components are 99px, overriding original specificity. */
-html body .app :is(.sheet,.card,.intro,.opt,.svcbtn,.chip,.chip-tab,.search,.avatar-tile,.profile-story,.fact-slide,.rcard,.anti,.end,.btn,.go,.switch,.round,.pill,.plat,.persona-secondary,.tag,.lvl,.ta,.viewer-face,.viewer-front-image,.viewer-back-secondary,.fact-caption,.rbadge,.wave-wheel,.ref-ruler),
-html body .app .sheet .svcbtn,
-html body .app .sheet .svcbtn .sq,
-html body .app .sheet:not(.intro) .chips-shell .search,
-html body .app .sheet:not(.intro) .chip-tab,
-html body .app .sheet:not(.intro) .chip,
-html body .app .bar.bar-in-card .btn,
-html body .app .intro.sheet,
-html body.wide .app .result .ctrack .slide .rcard,
-html body.wide .app .result>.anti,
-html body.wide .app .facts-wrap .fact-slide.fact-editorial,
-html body.wide .app .viewer-face,
-html body.wide .app .viewer-front-image {
- border-radius:99px !important;
-}
-@supports (corner-shape:superellipse(2.1)) {
- html body .app :is(.sheet,.card,.intro,.opt,.svcbtn,.chip,.chip-tab,.search,.avatar-tile,.profile-story,.fact-slide,.rcard,.anti,.end,.btn,.go,.switch,.round,.pill,.plat,.persona-secondary,.tag,.lvl,.ta,.viewer-face,.viewer-front-image,.viewer-back-secondary,.fact-caption,.rbadge,.wave-wheel,.ref-ruler),
- html body .app .sheet .svcbtn,
- html body .app .sheet .svcbtn .sq,
- html body .app .sheet:not(.intro) .chips-shell .search,
- html body .app .sheet:not(.intro) .chip-tab,
- html body .app .sheet:not(.intro) .chip,
- html body .app .bar.bar-in-card .btn,
- html body .app .intro.sheet,
- html body.wide .app .result .ctrack .slide .rcard,
- html body.wide .app .result>.anti,
- html body.wide .app .facts-wrap .fact-slide.fact-editorial,
- html body.wide .app .viewer-face,
- html body.wide .app .viewer-front-image {
-  corner-shape:superellipse(2.1) !important;
- }
-}
-
 
 /* --- Viewer hanger: continuous horizontal wire -> vertical drop -> eyelet --- */
 body.wide .persona-section {padding-top:124px!important;isolation:isolate;}
@@ -1797,7 +1671,7 @@ body .sheet .opts .opt{position:relative;overflow:hidden;isolation:isolate;conta
 body .sheet .opts .opt > :not(.ff-answer-fill){position:relative;z-index:2;}
 body .sheet .opts .opt.ff-answer-revealing {border-color:rgba(255,216,244,.82)!important;}
 .ff-answer-fill{position:absolute!important;z-index:1!important;inset:0;display:block;overflow:hidden;pointer-events:none;
-  border-radius:inherit;corner-shape:inherit;opacity:1;}
+  border-radius:inherit;opacity:1;}
 .ff-answer-ink{
   position:absolute;inset:0;display:block;
   background:radial-gradient(circle at var(--answer-point-x) var(--answer-point-y),
@@ -1835,10 +1709,12 @@ body .sheet .opts .opt.ff-answer-revealing {border-color:rgba(255,216,244,.82)!i
 
 /* FrameFinder: polished intro copy, physically inset form fields, editorial icons */
 body.intro-screen .intro .intro-subtitle {
+  margin-top:18px;
   font-size:clamp(17px,4.2vw,19px) !important;
   line-height:1.52 !important;
   letter-spacing:-.015em !important;
   max-width:48ch !important;
+  text-wrap:balance;
 }
 body.intro-screen .intro .facts {margin-top:25px;gap:10px;}
 body.intro-screen .intro .pill {
@@ -1856,7 +1732,7 @@ body.intro-screen .intro .fine {
 html body .app .sheet textarea.ta,
 html body .app .sheet .ta {
   border-radius:24px !important;
-  corner-shape:superellipse(2) !important;
+  
   padding:20px 21px !important;
   min-height:142px;
 }
@@ -1870,7 +1746,7 @@ html body.wide .app .fact-slide .fic {
   -webkit-backdrop-filter:none !important;
   filter:drop-shadow(0 4px 12px rgba(255,160,211,.40));
   width:48px !important;height:48px !important;
-  border-radius:0 !important;corner-shape:round !important;
+  border-radius:0 !important;
 }
 html body.wide .app .fact-editorial .fic svg,
 html body.wide .app .fact-slide .fic svg {width:28px;height:28px;}
@@ -1938,9 +1814,7 @@ body .sheet .opts .opt.ff-answer-revealing {isolation:isolate;overflow:hidden !i
  .ff-answer-lens,.ff-answer-glint{animation:none!important;display:none!important;}
 }
 @media(max-width:430px){
- html body.intro-screen .app .intro.sheet {padding-top:clamp(20px,4vh,30px)!important;padding-bottom:20px!important;}
  body.intro-screen .intro .facts{margin-top:20px!important;}
- body.intro-screen .intro .bar.bar-intro{margin-top:17px!important;}
 }
 @media(max-width:360px){
  body.intro-screen .intro .facts{gap:7px;}
@@ -1957,14 +1831,14 @@ body.wide .result .stream-services {
 body.wide .result .stream-service-icon {
   display:flex;flex:0 0 auto;justify-content:center;align-items:center;
   width:84px;height:84px;padding:7px;overflow:hidden;
-  border-radius:25px!important;corner-shape:superellipse(2.2)!important;
+  border-radius:25px!important;
   background:linear-gradient(145deg,rgba(20,12,29,.81),rgba(47,23,54,.86));
   border:1px solid rgba(255,226,244,.21);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 9px 25px rgba(12,2,22,.24);
 }
 body.wide .result .stream-service-icon img {
   display:block;width:100%;height:100%;object-fit:cover;
-  border-radius:18px!important;corner-shape:superellipse(2.2)!important;
+  border-radius:18px!important;
 }
 body.wide .result .ctrack .slide.is-active .rcard,
 body.wide .result .ctrack .slide .rcard {
@@ -1988,7 +1862,7 @@ body.wide .app .taste-details {max-width:100%;}
 body.wide .app .taste-details[open] .meters {
   padding:clamp(30px,7vw,42px) clamp(29px,8vw,52px)!important;
   border-radius:52px!important;
-  corner-shape:superellipse(2.1)!important;
+  
   gap:clamp(13px,3vw,21px)!important;
 }
 body.wide .app .taste-details[open] .meters .meter {min-width:0;gap:clamp(9px,2.3vw,18px);}
@@ -2227,7 +2101,7 @@ html body.wide .app .facts-wrap .fact-slide.fact-editorial {
   text-align:left !important;
   overflow:hidden !important;
   border-radius:99px !important;
-  corner-shape:superellipse(2.1) !important;
+  
   box-sizing:border-box !important;
 }
 html body.wide .app .facts-wrap .fact-editorial .fic {
@@ -2356,7 +2230,7 @@ html body.wide .app .ff-facts-heading {
 html body.wide .app .ff-facts-heading-icon {
   width:clamp(48px,9vw,66px);height:clamp(48px,9vw,66px);flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  border-radius:22px!important;corner-shape:superellipse(2.1);
+  border-radius:22px!important;
   background:linear-gradient(145deg,rgba(97,54,91,.76),rgba(81,46,79,.72));
   border:1px solid rgba(255,227,243,.17);
   -webkit-backdrop-filter:blur(24px) saturate(135%);backdrop-filter:blur(24px) saturate(135%);
@@ -2377,7 +2251,7 @@ html body.wide .app .ff-facts-heading-subtitle{
 html body.wide .app .ff-facts-mosaic-shell{
   position:relative;isolation:isolate;box-sizing:border-box;
   width:min(calc(100% - 24px),880px);padding:clamp(15px,3vw,30px);
-  border-radius:clamp(36px,7vw,80px)!important;corner-shape:superellipse(2.1);
+  border-radius:clamp(36px,7vw,80px)!important;
   background:linear-gradient(135deg,rgba(106,62,92,.76),rgba(83,47,85,.79) 60%,rgba(99,55,92,.76))!important;
   border:1px solid rgba(255,229,245,.21);
   box-shadow:0 26px 72px rgba(19,5,25,.26),inset 0 1px 0 rgba(255,238,249,.18);
@@ -2398,7 +2272,7 @@ html body.wide .app .ff-facts-mini{
   align-items:center;gap:clamp(8px,1.6vw,18px);
   min-width:0;min-height:clamp(110px,11vw,144px);
   padding:clamp(12px,2.4vw,24px);box-sizing:border-box;
-  border-radius:clamp(23px,4vw,42px)!important;corner-shape:superellipse(2.1);
+  border-radius:clamp(23px,4vw,42px)!important;
   background:linear-gradient(138deg,rgba(171,107,152,.28),rgba(116,68,112,.25) 70%)!important;
   border:1px solid rgba(255,230,248,.135);
   box-shadow:inset 0 1px 0 rgba(255,243,251,.09),0 5px 18px rgba(18,4,29,.065);
@@ -2434,7 +2308,7 @@ html body.wide .app .ff-facts-mosaic-section .taste-details summary{
 html body.wide .app .ff-taste-summary-icon{
   flex:0 0 clamp(44px,7vw,56px);display:grid;place-items:center;
   width:clamp(44px,7vw,56px);height:clamp(44px,7vw,56px);
-  border-radius:18px;corner-shape:superellipse(2.1);
+  border-radius:18px;
   background:rgba(133,81,132,.28);border:1px solid rgba(255,226,247,.13);
   -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
 }
@@ -2472,10 +2346,212 @@ html body .app .chips-shell .chip {
   backdrop-filter:none !important;
 }
 
+/* Mobile review: chapter first, then one progress control in every part. */
+html body .app :is(.sheet,.ref-scale-screen) > .question-chapter {
+  display:block !important;
+  width:fit-content;
+  max-width:100%;
+  margin:0 auto 16px !important;
+  font-size:12px !important;
+  font-weight:400;
+  line-height:1.3;
+  letter-spacing:-.4px !important;
+  text-align:center;
+  transform:none !important;
+  flex-shrink:0;
+}
+html body .app .question-chapter.tag {padding:5px 11px !important;}
+@media(min-width:768px){
+  html body .app :is(.sheet,.ref-scale-screen) > .question-chapter{font-size:13px !important;}
+}
+
+/* Let the glow fade outside the character's inner image frame. */
+html body.wide .app .viewer-front-image {
+  overflow:visible !important;
+  clip-path:none !important;
+  -webkit-mask:none !important;
+  mask:none !important;
+  contain:none;
+  background:none !important;
+  isolation:isolate;
+}
+html body.wide .app .viewer-front-image::before {
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  z-index:0;
+  left:50%;top:50%;
+  width:140%;aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle closest-side,
+    color-mix(in srgb,var(--avatar-accent) 23%,transparent) 0%,
+    color-mix(in srgb,var(--avatar-accent) 12%,transparent) 46%,
+    transparent 100%);
+}
+html body.wide .app .viewer-front-image img {position:relative;z-index:1;}
+
+
+/* ff-v27-result-fixes: transparent match rings and compact anti-recommendation. */
+html body.wide .app .result .gring {
+  background:none!important;box-shadow:none!important;color:#fff!important;
+}
+html body.wide .app .result .gring span,
+html body.wide .app .result .gring small {
+  color:#fff!important;-webkit-text-fill-color:#fff;background:none!important;text-shadow:none;
+}
+html body.wide .app .result>.sect-row .deck-hint {
+  flex-basis:100%;width:100%;max-width:none!important;
+  text-align:center!important;align-self:center;margin:0;
+}
+html body.wide .app .result>.anti-section {
+  order:3;width:100%;max-width:100%;min-width:0;
+  display:flex;flex-direction:column;gap:18px;
+  margin-top:clamp(28px,5vw,40px);
+}
+html body.wide .app .anti-heading {
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;min-width:0;text-align:center;
+}
+html body.wide .app .anti-title {
+  margin:0!important;min-width:0;text-align:center!important;
+  font-size:clamp(20px,5.5vw,29px);line-height:1.2;letter-spacing:-.025em;color:#fff;
+}
+html body.wide .app .anti-section .anti {
+  display:grid!important;grid-template-columns:clamp(52px,15vw,72px) minmax(0,1fr);
+  align-items:center!important;gap:clamp(12px,3vw,20px)!important;
+  width:100%;min-width:0;margin:0!important;padding:clamp(28px,6vw,40px)!important;
+  text-align:left!important;
+}
+html body.wide .app .anti-platform {min-width:0;}
+html body.wide .app .anti-platform .stream-services {
+  width:100%;max-width:none;flex-direction:column;align-items:stretch;gap:8px;
+}
+html body.wide .app .anti-platform .stream-service-icon {
+  width:100%;height:auto;aspect-ratio:1;padding:6px;
+}
+html body.wide .app .anti-copy {min-width:0;}
+html body.wide .app .anti-copy .atitle {
+  margin:0!important;font-size:clamp(18px,4.6vw,23px);line-height:1.2;
+  text-align:left!important;overflow-wrap:break-word;color:#fff;
+}
+html body.wide .app .anti-copy .pitch {
+  margin:8px 0 0!important;font-size:clamp(14px,3.65vw,16px);line-height:1.5;
+  text-align:left!important;color:rgba(255,240,249,.83);
+}
+
+
+/* Continuous corners: 40px main surfaces, 24px nested controls. */
+:root { --ff-card-radius:40px; --ff-control-radius:24px; }
+html body .app :is(.sheet,.card,.rcard,.avatar-tile,.profile-story,.fact-slide),
+html body.intro-screen .app .intro.sheet,
+html body.wide .app .result .ctrack .slide .rcard,
+html body.wide .app .viewer-face,
+html body.wide .app .ff-facts-mosaic-shell,
+html body.wide .app .taste-details[open] .meters {
+  border-radius:var(--ff-card-radius)!important;
+}
+html body .app :is(.opt,.svcbtn,.chip,.search,.ta,.viewer-back-secondary),
+html body .app .sheet .svcbtn,
+html body .app .sheet:not(.intro) .chips-shell .search,
+html body .app .sheet:not(.intro) .chip,
+html body.wide .app .ff-facts-mini,
+html body .btn,html body .go,html body .app .bar.bar-in-card .btn {
+  border-radius:var(--ff-control-radius)!important;
+}
+html body .app :is(.pill,.tag,.rbadge,.thumb,.plat,.persona-secondary),
+html body #toast {border-radius:999px!important;}
+html body .app :is(.round,.ref-scale-back,.gring,.badge,.wave-thumb,.hanging-eye) {
+  border-radius:50%!important;
+}
+html body.wide .app .viewer-flip-card:focus-visible {border-radius:var(--ff-card-radius);}
+
+/* Approved intro arc: large logos float across the frosted card's top edge. */
+html body.intro-screen .app .intro.sheet {
+  --intro-icon-size:clamp(66px,20.513vw,80px);
+  --intro-icon-gap:clamp(12px,4.616vw,18px);
+  margin-top:calc(clamp(80px,12.6vh,108px) + env(safe-area-inset-top,0px));
+  padding:calc(var(--intro-icon-size)*.7 + 40px) clamp(24px,7.18vw,36px) 28px!important;
+  overflow:visible!important;
+}
+html body.intro-screen .app .intro.sheet > .icons {
+  position:absolute;left:50%;top:calc(var(--intro-icon-size)*-.5);
+  display:flex;align-items:center;justify-content:center;
+  width:max-content;height:var(--intro-icon-size);min-height:0;
+  gap:var(--intro-icon-gap);margin:0;padding:0;
+  transform:translateX(-50%);z-index:1;overflow:visible;pointer-events:none;
+}
+/* Clip the artwork only; the card's native backdrop blur stays on its host. */
+html body .app .intro .icons .sq.lg {
+  width:var(--intro-icon-size);height:var(--intro-icon-size);margin:0;
+  padding:0!important;border:0!important;border-radius:calc(var(--intro-icon-size)*.225)!important;
+  background:transparent!important;box-shadow:none!important;
+  overflow:visible!important;filter:none!important;mask:none!important;-webkit-mask:none!important;
+  transform:translateY(calc(var(--intro-icon-size)*var(--intro-shift))) rotate(var(--intro-rotation));
+  transform-origin:center;
+}
+/* Slow, independent drift keeps the arc and the opening-wave source stable. */
+@media(prefers-reduced-motion:no-preference) {
+  html body.intro-screen .app .intro .icons .sq.lg {
+    animation:ff-intro-float 5.6s ease-in-out -.8s infinite;
+  }
+  html body.intro-screen .app .intro .icons .sq.lg:nth-child(2) {
+    animation-duration:6.4s;animation-delay:-2.7s;
+  }
+  html body.intro-screen .app .intro .icons .sq.lg:nth-child(3) {
+    animation-duration:6s;animation-delay:-4.4s;
+  }
+}
+@keyframes ff-intro-float {
+  0%,100% {
+    transform:translateY(calc(var(--intro-icon-size)*var(--intro-shift) - 4px)) rotate(calc(var(--intro-rotation) - 1deg));
+  }
+  50% {
+    transform:translateY(calc(var(--intro-icon-size)*var(--intro-shift) + 4px)) rotate(calc(var(--intro-rotation) + 1deg));
+  }
+}
+html body .app .intro .icons .sq.lg img,
+html body .app .sheet .svcbtn .sq img {
+  display:block;width:100%;height:100%;object-fit:cover;
+  border-radius:inherit;clip-path:var(--ff-smooth-clip,none);
+}
+
+/* Decorative surfaces alone are clipped. Content, focus and shadows stay on the host. */
+html body .ff-smooth-surface {
+  display:block!important;position:absolute!important;inset:0!important;
+  z-index:-2!important;pointer-events:none!important;opacity:1!important;
+  margin:0!important;padding:0!important;border:0!important;transform:none!important;
+  min-width:0!important;min-height:0!important;max-width:none!important;
+  border-radius:0!important;overflow:visible!important;
+  clip-path:var(--ff-smooth-clip);
+}
+html body .ff-smooth-surface > svg {
+  display:block!important;position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;max-width:none!important;
+  margin:0!important;padding:0!important;pointer-events:none!important;
+  overflow:visible!important;opacity:1!important;
+}
+html body [data-ff-smooth]::before,
+html body [data-ff-smooth] > .ff-answer-fill {
+  clip-path:var(--ff-smooth-clip);
+}
+/* Keep the moving sheen inside each face without clipping the 3D wrapper. */
+html body.wide .app .viewer-face[data-ff-smooth]::after {
+  inset:0;transform:none!important;clip-path:var(--ff-smooth-clip);
+  background-size:300% 100%;background-position:150% 50%;
+}
+@keyframes ff-card-sheen {
+  from{background-position:150% 50%;}
+  to{background-position:-50% 50%;}
+}
+
 </style>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;overflow:hidden;pointer-events:none">
+  <defs><linearGradient id="ff-match-ring-gradient" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="0" y2="60"><stop stop-color="#FF9A6B"/><stop offset="1" stop-color="#E8457E"/></linearGradient></defs>
+</svg>
 <main class="app" id="app"></main>
 <div class="bar" id="bar" hidden><button type="button" class="btn" id="cta" data-act="start">Начать</button></div>
 <script>
@@ -3191,17 +3267,24 @@ function caveat(r, P) {
   const bad = r.det.attr.filter(x => P.I[x[0]] >= 0.6 && x[2] >= 2).sort((a, b) => b[2] * b[1] - a[2] * a[1])[0];
   if (!bad) return null;
   const k = bad[0], hi = r.s.a[k] > P.T[k];
+  // Every branch is a complete sentence: no shared pronoun prefix is needed.
   const m = {
-    d: hi ? "может быть мрачнее, чем вы любите" : "может показаться слишком светлым",
-    p: hi ? "темп бывает быстрее, чем вам комфортно" : "первые серии идут неторопливо",
-    c: hi ? "сюжет сложнее, чем вы хотите" : "сюжет проще, чем вы привыкли",
-    h: hi ? "юмора здесь больше, чем вам нужно" : "юмора маловато",
-    r: hi ? "романтическая линия заметнее, чем вам хотелось бы" : "романтики будет меньше, чем вы любите",
-    v: hi ? "есть жёсткие сцены" : "жёсткости меньше, чем вы привыкли",
-    w: hi ? "атмосфера теплее, чем вам нужно" : "уюта тут мало",
-    e: hi ? "сериал эмоционально тяжелее, чем вы ожидаете" : "эмоций будет меньше, чем вы любите"
+    d: hi ? "Сериал может оказаться мрачнее, чем вам хотелось бы." : "В сериале меньше мрачности, чем вы предпочитаете.",
+    p: hi ? "Темп сериала может быть быстрее, чем вам комфортно." : "История развивается медленнее, чем вам хотелось бы.",
+    c: hi ? "Сюжет может оказаться сложнее, чем вам хотелось бы." : "Сюжет может показаться проще, чем вы привыкли.",
+    h: hi ? "В сериале больше юмора, чем вам хотелось бы." : "В сериале меньше юмора, чем вам хотелось бы.",
+    r: hi ? "Романтическая линия заметнее, чем вам хотелось бы." : "Романтики в сериале меньше, чем вам хотелось бы.",
+    v: hi ? "В сериале больше жёстких сцен, чем вам хотелось бы." : "В сериале меньше жёстких сцен, чем вы предпочитаете.",
+    w: hi ? "Атмосфера сериала теплее, чем вы предпочитаете." : "В сериале меньше тепла и уюта, чем вам хотелось бы.",
+    e: hi ? "Сериал может оказаться эмоционально тяжелее, чем вы ожидаете." : "Эмоций может быть меньше, чем вам хотелось бы."
   };
-  return m[k];
+  return m[k] || null;
+}
+
+function antiReason(r, P) {
+  const unwanted = r.s.tags.filter(t => (P.tags[t] || 0) <= -0.9).map(t => TAG_RU[t]).filter(Boolean);
+  if (unwanted.length) return "В сериале есть то, что вам не нравится: " + unwanted.join(", ") + ".";
+  return caveat(r, P) || "По настроению сериал заметно отличается от ваших предпочтений.";
 }
 
 /* ---------- архетипы ---------- */
@@ -3421,7 +3504,7 @@ function playIntroOpening() {
   introOpeningFrame=requestAnimationFrame(tick);
 }
 
-/* --- вступление: орбита --- */
+/* --- вступление: стриминговые иконки полукругом --- */
 function viewIntro() {
   restoreQuestionBar();
   document.body.classList.remove("scale-question");
@@ -3429,7 +3512,7 @@ function viewIntro() {
   const n = active().length;
   $app.innerHTML = `
     <section class="sheet enter intro">
-      <div class="icons" aria-hidden="true">${["N", "A", "H"].map((k, i) => `<span class="sq lg" style="--r:${[-8, 0, 8][i]}deg;--y:${[6, -6, 6][i]}px"><img src="${LOGO[k]}" alt=""></span>`).join("")}</div>
+      <div class="icons" aria-hidden="true">${["N", "A", "H"].map((k, i) => `<span class="sq lg" style="--intro-rotation:${[-18, 0, 18][i]}deg;--intro-shift:${[.1375, -.2375, .1375][i]}"><img src="${LOGO[k]}" alt=""></span>`).join("")}</div>
       <h1>Найдём сериал под ваш вкус</h1>
       <p class="lead intro-subtitle">Netflix, Apple TV+ и HBO. Около ${n} вопросов — не про жанры, а про темп, настроение и героев, которые вам близки.</p>
       <div class="facts">
@@ -3539,12 +3622,12 @@ function viewQuestion() {
   document.body.classList.toggle("scale-question", q.type === "scale");
   if (q.type === "scale") {
     $app.innerHTML = `<section class="ref-scale-screen enter">
+       <p class="ref-scale-kicker question-chapter">Часть ${q.ch + 1} / ${CHAPTERS[q.ch]}</p>
        <div class="ref-scale-top">
          <button class="ref-scale-back" type="button" data-act="back" aria-label="Назад">${ICON_BACK}</button>
          <div class="track unified-progress" role="progressbar" aria-valuemin="1" aria-valuemax="${n}" aria-valuenow="${S.idx+1}" aria-label="Прогресс опроса"><i class="fill" style="width:${pct}%"></i><span class="thumb" style="--pct:${pct}%">${S.idx + 1}/${n}</span></div>
        </div>
        <div class="ref-scale-heading">
-         <p class="ref-scale-kicker">Часть ${q.ch + 1} / ${CHAPTERS[q.ch]}</p>
          <h2 id="qtitle" tabindex="-1">${esc(q.title)}</h2>
          ${q.hint ? `<p class="ref-scale-hint">${esc(q.hint)}</p>` : ""}
        </div>
@@ -3553,11 +3636,11 @@ function viewQuestion() {
   } else {
     $app.innerHTML = `
       <section class="sheet enter">
+        <span class="tag question-chapter">Часть ${q.ch + 1}: ${CHAPTERS[q.ch]}</span>
         <div class="head">
           <button type="button" class="round" data-act="back" aria-label="Назад">${ICON_BACK}</button>
           <div class="track unified-progress" role="progressbar" aria-valuemin="1" aria-valuemax="${n}" aria-valuenow="${S.idx+1}" aria-label="Прогресс опроса"><i class="fill" style="width:${pct}%"></i><span class="thumb" style="--pct:${pct}%">${S.idx + 1}/${n}</span></div>
         </div>
-        <span class="tag">Часть ${q.ch + 1}: ${CHAPTERS[q.ch]}</span>
         <h2 class="q" id="qtitle" tabindex="-1">${esc(q.title)}</h2>
         ${q.hint ? `<p class="hint">${esc(q.hint)}</p>` : ""}
         <div id="body">${bodyHTML(q)}</div>
@@ -3647,13 +3730,19 @@ function renderWheel(floatVal,q) {
 }
 function animateWheel(target,q) {
   cancelAnimationFrame(WHEEL_ANIM);
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){renderWheel(target,q);return;}
-  const start=WHEEL_CURRENT,startTime=performance.now(),duration=560;
+  WHEEL_ANIM=0;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(target-WHEEL_CURRENT)<.001){
+    renderWheel(target,q);return;
+  }
+  const wheel=document.getElementById('refRuler');
+  const start=WHEEL_CURRENT,startTime=performance.now(),duration=160;
   function frame(now){
+    // A short snap belongs only to the question that started it.
+    if(document.getElementById('refRuler')!==wheel){WHEEL_ANIM=0;return;}
     const t=Math.min(1,(now-startTime)/duration);
     const ease=1-Math.pow(1-t,4);
     renderWheel(start+(target-start)*ease,q);
-    if(t<1)WHEEL_ANIM=requestAnimationFrame(frame);
+    WHEEL_ANIM=t<1?requestAnimationFrame(frame):0;
   }
   WHEEL_ANIM=requestAnimationFrame(frame);
 }
@@ -3682,39 +3771,47 @@ function initSwipeRuler(q){
     updateScale(q,v);
   });
   let gesture=null;
+  function finishGesture(e,cancelled){
+    if(!gesture || e.pointerId!==gesture.id)return;
+    const current=gesture;
+    let v=WHEEL_CURRENT;
+    if(!cancelled){
+      // The release can carry a newer position than the last pointermove.
+      const dx=e.clientX-current.startX;
+      v=current.dragged || Math.abs(dx)>3
+        ? current.startValue+dx/current.width*4
+        : 1+4*(e.clientX-current.left)/current.width;
+      renderWheel(v,q);
+    }
+    gesture=null;
+    WHEEL_ACTIVE=false;
+    if(wheel.hasPointerCapture?.(current.id))wheel.releasePointerCapture(current.id);
+    updateScale(q,v);
+    if(!cancelled)buzz();
+  }
   wheel.addEventListener('pointerdown',e=>{
-    if(e.pointerType==='mouse'&&e.button!==0)return;
+    if(gesture || e.isPrimary===false || (e.pointerType==='mouse'&&e.button!==0))return;
     cancelAnimationFrame(WHEEL_ANIM);
+    WHEEL_ANIM=0;
     const rect=wheel.getBoundingClientRect();
-    gesture={id:e.pointerId,startX:e.clientX,startValue:WHEEL_CURRENT,dragged:false};
+    if(rect.width<=0)return;
+    // Cache geometry so pointermove can paint immediately without a layout read.
+    gesture={id:e.pointerId,startX:e.clientX,startValue:WHEEL_CURRENT,
+      left:rect.left,width:rect.width,dragged:false};
+    WHEEL_ACTIVE=true;
     wheel.setPointerCapture(e.pointerId);
   });
   wheel.addEventListener('pointermove',e=>{
     if(!gesture || e.pointerId!==gesture.id)return;
-    const rect=wheel.getBoundingClientRect();
     const dx=e.clientX-gesture.startX;
     if(Math.abs(dx)>3)gesture.dragged=true;
     if(!gesture.dragged)return;
-    const v=gesture.startValue+dx/rect.width*4;
-    renderWheel(v,q);
+    // Direct manipulation has no CSS tween and no queued animation frame.
+    renderWheel(gesture.startValue+dx/gesture.width*4,q);
   });
-  wheel.addEventListener('pointerup',e=>{
-    if(!gesture||e.pointerId!==gesture.id)return;
-    const rect=wheel.getBoundingClientRect();
-    let v=WHEEL_CURRENT;
-    if(!gesture.dragged){
-      const px=(e.clientX-rect.left)/rect.width;
-      v=1+4*Math.max(0,Math.min(1,px));
-      renderWheel(v,q);
-    }
-    gesture=null;
-    updateScale(q,v);
-    buzz();
-  });
-  wheel.addEventListener('pointercancel',()=>{
-    gesture=null;
-    updateScale(q,WHEEL_CURRENT);
-  });
+  wheel.addEventListener('pointerup',e=>finishGesture(e,false));
+  wheel.addEventListener('pointercancel',e=>finishGesture(e,true));
+  wheel.addEventListener('lostpointercapture',e=>finishGesture(e,true));
 }
 
 /* Show the actual viewer avatar on the FIRST frame of the finishing wave. */
@@ -3884,10 +3981,40 @@ const linkLabel = () => "Подробнее о сериале";
 const yearsOf = s => s.u > s.y ? s.y + "–" + s.u : String(s.y);
 const seasonText = s => s.seasons ? `${s.seasons} ${s.seasons===1 ? "сезон" : s.seasons>=2&&s.seasons<=4 ? "сезона" : "сезонов"}` : "";
 
+function matchRingHTML(value) {
+  const raw = Number(value);
+  const pct = Number.isFinite(raw) ? Math.max(0, Math.min(100, Math.round(raw))) : 0;
+  // Offset by a quarter turn so the arc starts at twelve o'clock.
+  const dash = pct < 100 ? ` stroke-dasharray="${pct} ${100 - pct}" stroke-dashoffset="25"` : "";
+  return `<div class="gring sm" role="img" aria-label="Совпадение ${pct}%">
+    <svg class="gring-svg" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+      <circle class="gring-track" cx="30" cy="30" r="27.5" fill="none" stroke-width="5"/>
+      ${pct > 0 ? `<circle class="gring-progress" cx="30" cy="30" r="27.5" fill="none" stroke="url(#ff-match-ring-gradient)" stroke-width="5" stroke-linecap="round" pathLength="100"${dash}/>` : ""}
+    </svg>
+    <span aria-hidden="true">${pct}<small>%</small></span>
+  </div>`;
+}
+
+function antiHTML(anti, P) {
+  return `<section class="anti-section" aria-labelledby="anti-title">
+    <div class="anti-heading">
+      <h2 class="anti-title" id="anti-title">Скорее всего не ваше</h2>
+    </div>
+    <article class="card anti">
+      <div class="anti-platform">${platPill(anti.s)}</div>
+      <div class="anti-copy">
+        <h3 class="atitle">${esc(showName(anti.s))}</h3>
+        <p class="pitch">${esc(antiReason(anti, P))}</p>
+      </div>
+    </article>
+  </section>`;
+}
+
+
 function slideHTML(o, P) {
   const r = o.r, s = r.s, why = reasons(r, P).slice(0, 2);
   return `<div class="slide"><article class="rcard${o.wild ? " wild" : ""}" aria-label="${esc(showName(s))}, совпадение ${r.pct}%">
-    <div class="rtop">${platPill(s)}<div class="gring sm" style="--p:${r.pct}"><span>${r.pct}<small>%</small></span></div></div>
+    <div class="rtop">${platPill(s)}${matchRingHTML(r.pct)}</div>
     ${o.badge ? `<span class="rbadge">${esc(o.badge)}</span>` : ""}
     <h3>${esc(showName(s))}</h3>
     <div class="pills"><span class="pill">${yearsOf(s)}</span>${seasonText(s) ? `<span class="pill">${seasonText(s)}</span>` : ""}<span class="pill">около ${s.m} мин</span></div>
@@ -3921,12 +4048,6 @@ function viewResult() {
     .sort((a, b) => b.v - a.v)[0];
   const wild = wc ? pcts([wc.r], all)[0] : null;
   const anti = all.filter(r => r.s.pop && !used.has(r.s.id)).slice(-1)[0];
-  let antiWhy = "";
-  if (anti) {
-    const neg = anti.s.tags.filter(t => (P.tags[t] || 0) <= -0.9).map(t => TAG_RU[t]);
-    const cv = caveat(anti, P);
-    antiWhy = neg.length ? "В нём есть то, что вам не нравится: " + neg.join(", ") + "." : cv ? "Он " + cv + "." : "Он заметно расходится с вашим настроением.";
-  }
   const slides = picks.map((r, i) => ({ r, badge: i === 0 ? "Лучший мэтч ❤️" : "" }));
   if (wild) slides.push({ r: wild, badge: "", wild: true });
   const facts = factList(P, allP);
@@ -3944,7 +4065,7 @@ function viewResult() {
         <span class="cnt" id="cnt" aria-live="polite">1 / ${slides.length}</span>
       </div>` : `<div class="card"><p class="pitch">По вашим ответам пока не удалось подобрать сериалы.</p></div>`}
 
-      ${anti ? `<div class="card anti"><h2>Скорее не ваше</h2><p class="hint">Популярный сериал, который у вас вряд ли зайдёт.</p><p class="atitle"><strong>${esc(showName(anti.s))}</strong></p><p class="pitch">${esc(antiWhy)}</p></div>` : ""}
+      ${anti ? antiHTML(anti, P) : ""}
 
 
       <section class="persona-section enter" aria-label="Ваш тип зрителя">
@@ -4019,16 +4140,24 @@ function carUpdate(animate=false) {
   const tr=CAR.tr;
   if (!tr || !tr.isConnected) return;
   const slides=[...tr.querySelectorAll(':scope > .slide')];
-  if (!slides.length) return;
+  const count=slides.length;
+  CAR.cur=count?((CAR.cur%count)+count)%count:0;
+  const counter=document.getElementById('cnt');
+  if(counter) counter.textContent=`${count?CAR.cur+1:0} / ${count}`;
+  const navprev=document.querySelector('[data-act="prev"]'),navnext=document.querySelector('[data-act="nextc"]');
+  if(navprev) navprev.disabled=count<2;
+  if(navnext) navnext.disabled=count<2;
+  if (!count) return;
   slides.forEach((sl,i)=>{
-    const delta=i-CAR.cur;
-    sl.classList.toggle('is-active',delta===0);
-    sl.classList.toggle('is-prev',delta===-1);
-    sl.classList.toggle('is-next',delta===1);
-    sl.classList.toggle('is-hidden',Math.abs(delta)>1);
-    sl.toggleAttribute('inert',delta!==0);
-    sl.setAttribute('aria-hidden',String(delta!==0));
-    sl.style.zIndex=String(delta===0?6:Math.abs(delta)===1?3:1);
+    const offset=(i-CAR.cur+count)%count;
+    const active=offset===0,next=offset===1,prev=count>2&&offset===count-1;
+    sl.classList.toggle('is-active',active);
+    sl.classList.toggle('is-prev',prev);
+    sl.classList.toggle('is-next',next);
+    sl.classList.toggle('is-hidden',!active&&!prev&&!next);
+    sl.toggleAttribute('inert',!active);
+    sl.setAttribute('aria-hidden',String(!active));
+    sl.style.zIndex=String(active?6:prev||next?3:1);
   });
   // Keep enough vertical room for complete descriptions, without clipping.
   const current=slides[CAR.cur];
@@ -4037,11 +4166,6 @@ function carUpdate(animate=false) {
     const h=Math.max(460,Math.ceil(card.scrollHeight)+42);
     tr.style.height=h+'px';
   }
-  const counter=document.getElementById('cnt');
-  if(counter) counter.textContent=`${CAR.cur+1} / ${slides.length}`;
-  const navprev=document.querySelector('[data-act="prev"]'),navnext=document.querySelector('[data-act="nextc"]');
-  if(navprev) navprev.disabled=CAR.cur===0;
-  if(navnext) navnext.disabled=CAR.cur>=slides.length-1;
   if(animate && !matchMedia('(prefers-reduced-motion:reduce)').matches){
     current.classList.remove('deck-arrived');void current.offsetWidth;current.classList.add('deck-arrived');
     setTimeout(()=>current.classList.remove('deck-arrived'),650);
@@ -4051,10 +4175,12 @@ function carTo(i){
   const tr=CAR.tr;
   if(!tr || CAR.busy) return;
   const count=tr.querySelectorAll(':scope > .slide').length;
-  i=Math.max(0,Math.min(count-1,i));
+  if(count<2 || !Number.isInteger(i)) return;
+  // Keep the gesture's direction before wrapping the last card back to the first.
+  const direction=i>CAR.cur?1:-1;
+  i=((i%count)+count)%count;
   if(i===CAR.cur) return;
   const old=tr.querySelectorAll(':scope > .slide')[CAR.cur],card=old?.querySelector('.rcard');
-  const direction=i>CAR.cur?1:-1;
   const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(card && !reduce){
     const trRect=tr.getBoundingClientRect(),r=card.getBoundingClientRect();
@@ -4075,7 +4201,7 @@ function carTo(i){
   setTimeout(()=>{CAR.busy=false;carUpdate();},reduce?10:580);
 }
 function initCarousel(){
-  const tr=document.getElementById('ctrack');CAR.tr=tr;CAR.cur=0;CAR.busy=false;
+  const tr=document.getElementById('ctrack');CAR.tr=tr;CAR.cur=0;CAR.busy=false;CAR.drag=null;
   if(!tr) return;
   tr.addEventListener('keydown',e=>{
     if(e.target.closest('a,button')) return;
@@ -4098,16 +4224,22 @@ function initCarousel(){
     if(tr.dataset.swiped==='1'){e.preventDefault();e.stopPropagation();return;}
     const sl=e.target.closest('.slide');if(!sl)return;
     const i=[...tr.querySelectorAll(':scope > .slide')].indexOf(sl);
-    if(i!==CAR.cur){e.preventDefault();carTo(i);return;}
+    if(i!==CAR.cur){
+      e.preventDefault();
+      if(sl.classList.contains('is-next')) carTo(CAR.cur+1);
+      else if(sl.classList.contains('is-prev')) carTo(CAR.cur-1);
+      return;
+    }
     // Tap the active card to deal the next recommendation, unless opening its detail link.
     if(!e.target.closest('a,button,input')) carTo(CAR.cur+1);
   });
   carUpdate();
   requestAnimationFrame(()=>carUpdate());
   if(CAR.resize) CAR.resize.disconnect();
-  if(typeof ResizeObserver!=='undefined'){
+  const firstCard=tr.querySelector('.slide .rcard');
+  if(firstCard && typeof ResizeObserver!=='undefined'){
     CAR.resize=new ResizeObserver(()=>{if(CAR.tr?.isConnected) carUpdate();});
-    CAR.resize.observe(tr.querySelector('.slide .rcard'));
+    CAR.resize.observe(firstCard);
   }
 }
 addEventListener('resize',()=>{if(CAR.tr?.isConnected)carUpdate();});
@@ -4224,6 +4356,194 @@ document.addEventListener("input", e => {
   if (e.target.dataset && e.target.dataset.act === "text" && q) { S.ans[q.id] = e.target.value; setBar("q"); }
 });
 
+/**
+ * Uniform-corner Figma-style C-A-C path, adapted from figma-squircle 1.1.0.
+ * Source: https://github.com/phamfoo/figma-squircle/blob/main/src/draw.ts
+ *
+ * MIT License
+ * 
+ * Copyright (c) 2021 Tien Pham
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+function ffSmoothRectPath(width, height, radius = 40, smoothing = 0.6, fit = 'smoothing') {
+  const w = Math.max(0, Number(width) || 0), h = Math.max(0, Number(height) || 0);
+  const budget = Math.min(w, h) / 2;
+  let s = Math.max(0, Math.min(1, Number(smoothing) || 0));
+  let r = Math.max(0, Math.min(Number(radius) || 0, budget));
+  // 'smoothing': keep the requested smoothing, fit the radius to the box.
+  // 'figma': keep radius first and reduce smoothing when corners compete.
+  if (fit === 'figma') s = r ? Math.min(s, budget / r - 1) : 0;
+  else r = Math.min(r, budget / (1 + s));
+  const f = n => Number(n.toFixed(4));
+  if (!r) return {path:`M0 0H${f(w)}V${f(h)}H0Z`, radius:r, smoothing:s};
+  const p = (1 + s) * r;
+  const arc = Math.sin(Math.PI / 4 * (1 - s)) * r * Math.SQRT2;
+  const angle = Math.PI / 4 * s;
+  const shoulder = r * Math.tan(angle / 2);
+  const c = shoulder * Math.cos(angle), d = c * Math.tan(angle);
+  const b = (p - arc - c - d) / 3, a = 2 * b;
+  const n = values => values.map(f).join(' ');
+  const path = [
+    `M${n([w-p,0])}`,
+    `c${n([a,0,a+b,0,a+b+c,d])}`,
+    `a${n([r,r,0,0,1,arc,arc])}`,
+    `c${n([d,c,d,b+c,d,a+b+c])}`,
+    `L${n([w,h-p])}`,
+    `c${n([0,a,0,a+b,-d,a+b+c])}`,
+    `a${n([r,r,0,0,1,-arc,arc])}`,
+    `c${n([-c,d,-(b+c),d,-(a+b+c),d])}`,
+    `L${n([p,h])}`,
+    `c${n([-a,0,-(a+b),0,-(a+b+c),-d])}`,
+    `a${n([r,r,0,0,1,-arc,-arc])}`,
+    `c${n([-d,-c,-d,-(b+c),-d,-(a+b+c)])}`,
+    `L${n([0,p])}`,
+    `c${n([0,-a,0,-(a+b),d,-(a+b+c)])}`,
+    `a${n([r,r,0,0,1,arc,-arc])}`,
+    `c${n([c,-d,b+c,-d,a+b+c,-d])}Z`,
+  ].join(' ');
+  return {path, radius:r, smoothing:s};
+}
+
+
+// Smooth only the tint and stroke. Native glass blur stays on each card.
+// Never clip the 3D scene or the avatar's inner glow frame.
+function initSmoothCorners() {
+  if (typeof ResizeObserver==='undefined' || typeof MutationObserver==='undefined' ||
+      typeof CSS==='undefined' || !CSS.supports('clip-path','path("M0 0H1V1H0Z")')) return;
+  const selector=[
+    '.sheet','.card','.rcard','.viewer-face','.ff-facts-mosaic-shell',
+    '.taste-details .meters','.opt','.svcbtn','.chip','.search','.btn','.go',
+    '.ff-facts-mini','.viewer-back-secondary','.icons .sq.lg','.svcbtn .sq',
+    '.stream-service-icon','.ff-facts-heading-icon','.ff-taste-summary-icon'
+  ].join(',');
+  const managed=['background','border-color','box-shadow','border-radius','corner-shape','isolation'];
+  const states=new WeakMap(), active=new Set(), dirty=new Set();
+  let frame=0, scan=true;
+  const set=(el,key,value)=>el.style.setProperty(key,value,'important');
+  const queue=()=>{if(!frame)frame=requestAnimationFrame(flush);};
+  const mark=root=>{
+    if(!root || root.nodeType!==1)return;
+    if(root.matches(selector))dirty.add(root);
+    root.querySelectorAll(selector).forEach(el=>dirty.add(el));
+  };
+  const resize=new ResizeObserver(entries=>{
+    entries.forEach(({target})=>dirty.add(target));queue();
+  });
+  function register(el) {
+    let state=states.get(el);
+    if(!state){
+      state={original:managed.map(key=>[key,el.style.getPropertyValue(key),el.style.getPropertyPriority(key)]),
+        icon:el.matches('.icons .sq.lg,.svcbtn .sq')};
+      states.set(el,state);
+      // The paint now lives on a child, so background transitions on the host
+      // would otherwise produce a transparent intermediate computed value.
+      set(el,'transition-property','transform,opacity');
+      dirty.add(el);
+    }
+    if(!active.has(el)){active.add(el);resize.observe(el,{box:'border-box'});dirty.add(el);}
+    if(!state.icon && state.surface?.parentNode!==el)dirty.add(el);
+  }
+  function paint(el) {
+    const state=states.get(el);
+    if(!state || !el.isConnected)return;
+    // Restore author paint only while measuring; all updates finish before paint.
+    state.original.forEach(([key,value,priority])=>{
+      if(value)el.style.setProperty(key,value,priority);else el.style.removeProperty(key);
+    });
+    const cs=getComputedStyle(el), px=value=>parseFloat(value)||0;
+    const border=[cs.borderLeftWidth,cs.borderTopWidth,cs.borderRightWidth,cs.borderBottomWidth].map(px);
+    const w=px(cs.width)||el.offsetWidth, h=px(cs.height)||el.offsetHeight;
+    if(w<=0 || h<=0)return;
+    const radius=px(cs.borderTopLeftRadius);
+    const shape=ffSmoothRectPath(w,h,radius,.6);
+    if(state.icon){
+      set(el,'border-radius',shape.radius+'px');set(el,'corner-shape','round');
+      el.style.setProperty('--ff-smooth-clip',`path("${shape.path}")`);
+      return;
+    }
+    const cw=Math.max(0,w-border[0]-border[2]),ch=Math.max(0,h-border[1]-border[3]);
+    if(!cw || !ch)return;
+    const inner=ffSmoothRectPath(cw,ch,Math.max(0,shape.radius-Math.max(...border)),.6);
+    // Copy values before changing the live CSSStyleDeclaration's host.
+    const background=cs.background;
+    const hasBackdrop=[cs.backdropFilter,cs.webkitBackdropFilter].some(value=>value && value!=='none');
+    const stroke=cs.borderTopColor, strokeWidth=Math.max(...border);
+    const shadows=cs.boxShadow.split(/,(?![^(]*\))/).map(s=>s.trim());
+    const outer=shadows.filter(s=>!s.includes('inset')).join(',')||'none';
+    const inset=shadows.filter(s=>s.includes('inset')).join(',')||'none';
+    if(cs.position==='static')set(el,'position','relative');
+    // Native backdrop-filter supplies its own stacking context. Keep the
+    // original glass/isolation on the host; only flat controls need isolation.
+    if(!hasBackdrop)set(el,'isolation','isolate');
+    if(!state.surface){
+      const surface=document.createElement('span');surface.className='ff-smooth-surface';
+      surface.setAttribute('aria-hidden','true');
+      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('focusable','false');svg.setAttribute('aria-hidden','true');
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('fill','none');svg.appendChild(path);surface.appendChild(svg);
+      Object.assign(state,{surface,svg,path});
+    }
+    if(state.surface.parentNode!==el)el.appendChild(state.surface);
+    set(state.surface,'background',background);
+    set(state.surface,'backdrop-filter','none');set(state.surface,'-webkit-backdrop-filter','none');
+    set(state.surface,'box-shadow',inset);
+    set(state.surface,'border-radius',inner.radius+'px');
+    state.svg.setAttribute('viewBox',`0 0 ${cw} ${ch}`);
+    state.path.setAttribute('d',inner.path);state.path.setAttribute('stroke',stroke);
+    state.path.setAttribute('stroke-width',String(strokeWidth*2));
+    el.style.setProperty('--ff-smooth-clip',`path("${inner.path}")`);
+    set(el,'background','transparent');set(el,'border-color','transparent');
+    set(el,'box-shadow',outer);set(el,'border-radius',shape.radius+'px');set(el,'corner-shape','round');
+    el.setAttribute('data-ff-smooth','');
+  }
+  function flush() {
+    frame=0;
+    if(scan){
+      scan=false;
+      for(const el of active)if(!el.isConnected){resize.unobserve(el);active.delete(el);dirty.delete(el);}
+      document.querySelectorAll(selector).forEach(register);
+    }
+    const batch=[...dirty];dirty.clear();batch.forEach(paint);
+  }
+  const observer=new MutationObserver(records=>{
+    for(const record of records){
+      if(record.type==='attributes'){mark(record.target);continue;}
+      // Ignore our own decoration. Do not rebuild options or their contents.
+      const nodes=[...record.addedNodes,...record.removedNodes];
+      if(nodes.length && nodes.every(node=>node.nodeType===1 && node.classList.contains('ff-smooth-surface')))continue;
+      scan=true;
+    }
+    queue();
+  });
+  observer.observe(document.body,{subtree:true,childList:true,attributes:true,
+    attributeFilter:['class','aria-pressed','open','disabled']});
+  for(const event of ['focusin','focusout'])document.addEventListener(event,e=>{
+    const el=e.target.closest?.(selector);if(el){dirty.add(el);queue();}
+  });
+  // Re-evaluate responsive radii and paint; ResizeObserver handles geometry.
+  window.addEventListener('resize',()=>{active.forEach(el=>dirty.add(el));queue();},{passive:true});
+  queue();
+}
+
+initSmoothCorners();
 viewIntro();
 
 </script>
