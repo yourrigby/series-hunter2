@@ -312,7 +312,7 @@ html, body { overflow-x: clip; }
 @media (min-width: 768px) { .bg { background-position: center, center 45%; } }
 body.scale-question { background:#1b042f; color:#fff; overflow-x:hidden; }
 body.scale-question .bg {background:linear-gradient(180deg,#190126 0%,#20032f 63%,#32024b 100%);overflow:hidden;}
-body.scale-question .bg::before {content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 51% at 50% 109%,rgba(255,173,130,.98) 0%,rgba(253,92,153,.88) 40%,rgba(187,25,237,.58) 73%,transparent 100%);filter:blur(20px);pointer-events:none;}
+body.scale-question .bg::before {content:"";position:absolute;pointer-events:none;}
 body.scale-question .bg::after {opacity:.07;}
 body.scale-question .app {width:100%;max-width:520px;padding:0 18px 0;min-height:100svh;display:block;}
 .ref-scale-screen {position:relative;isolation:isolate;min-height:100svh;color:#fff;padding:34px 10px 120px;overflow:visible;}
@@ -1066,19 +1066,34 @@ body.wide .cnav {margin-top:-20px !important;}
   body.wide .taste-details summary .details-chevron {transition:none !important;}
 }
 body.scale-question .bg::before {
+  inset:auto;
+  left:50%;
+  top:76%;
+  width:min(90vw,80svh,900px);
+  aspect-ratio:1;
+  border-radius:50%;
+  filter:blur(20px);
   opacity:var(--ff-scale-glow,.28) !important;
-  transform:scale(var(--ff-scale-glow-zoom,1.06));
-  transform-origin:50% 86%;
+  transform:translate(-50%,-50%) scale(var(--ff-scale-glow-zoom,.94));
+  transform-origin:center;
   transition:opacity 95ms linear,transform 140ms ease-out;
-  background:radial-gradient(ellipse 70% 51% at 50% 109%,rgba(255,187,158,1) 0%,rgba(255,101,178,.91) 39%,rgba(194,36,245,.68) 73%,transparent 100%);
+  background:radial-gradient(circle closest-side,rgba(255,187,158,1) 0%,rgba(255,101,178,.91) 36%,rgba(194,36,245,.68) 66%,rgba(148,22,203,.18) 83%,transparent 100%);
 }
 body.scale-question .wave-wheel::before {
   content:"";pointer-events:none;position:absolute;z-index:0;
-  inset:-10px -8px -8px;
-  border-radius:42%;
+  inset:auto;
+  left:var(--progress,50%);
+  top:100%;
+  width:clamp(80px,16vmin,140px);
+  aspect-ratio:1;
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(var(--ff-scale-glow-zoom,.94));
   opacity:var(--ff-scale-wheel-glow,.20);
-  background:radial-gradient(ellipse 38% 62% at var(--progress,50%) 90%,rgba(255,140,240,.80),rgba(219,55,239,.24) 44%,transparent 77%);
+  background:radial-gradient(circle closest-side,rgba(255,140,240,.80),rgba(219,55,239,.24) 44%,transparent 100%);
   filter:blur(24px);
+}
+@media (prefers-reduced-motion:reduce) {
+  body.scale-question .bg::before {transition:none;}
 }
 body.scale-question .wave-wheel-bars {position:relative;z-index:1;}
 body.scale-question .wave-thumb {z-index:3;}
@@ -2449,6 +2464,14 @@ html body.wide .app .ff-facts-mosaic-section .taste-details summary .details-che
  html body.wide .app .ff-facts-mini-sub{font-size:12px;}
 }
 
+
+/* Keep chip text and borders in one paint layer inside the scrolling list.
+   The surrounding sheet supplies the matte-glass backdrop for all options. */
+html body .app .chips-shell .chip {
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+}
+
 </style>
 </head>
 <body>
@@ -3559,12 +3582,36 @@ function repaint(focusSel) {
   setBar("q");
   if (focusSel) { const el = document.querySelector(focusSel); if (el) el.focus({ preventScroll: true }); }
 }
-function repaintChips(focusSel) {
-  const q = active()[S.idx];
-  document.getElementById("chips").innerHTML = chipsInner(q);
-  document.getElementById("count").textContent = countText(q);
+function syncChoiceSelection(q) {
+  // A selection changes state, not the option list. Keep existing buttons,
+  // focus and scroll position instead of rebuilding their compositing layers.
+  const selected = new Set(Array.isArray(S.ans[q.id]) ? S.ans[q.id] : []);
+  const isChips = q.type === "chips";
+  const scope = document.getElementById(isChips ? "chips" : "body");
+  if (!scope) return;
+  const selector = isChips ? '.chip[data-id]' : '[data-act="opt"][data-i]';
+  scope.querySelectorAll(selector).forEach(button => {
+    const id = isChips ? button.dataset.id : Number(button.dataset.i);
+    const pressed = String(selected.has(id));
+    if (button.getAttribute("aria-pressed") !== pressed) {
+      button.setAttribute("aria-pressed", pressed);
+    }
+  });
+  if (isChips) {
+    const count = document.getElementById("count");
+    if (count) count.textContent = countText(q);
+  }
   setBar("q");
-  if (focusSel) { const el = document.querySelector(focusSel); if (el) el.focus({ preventScroll: true }); }
+}
+function repaintChips() {
+  const q = active()[S.idx];
+  const chips = document.getElementById("chips");
+  if (!q || !chips) return;
+  // Rebuild only when the search changes the visible list. The search input
+  // and platform state stay intact, while new matches start at the top.
+  chips.innerHTML = chipsInner(q);
+  chips.scrollTop = 0;
+  syncChoiceSelection(q);
 }
 
 let WHEEL_ACTIVE = false;
@@ -3576,7 +3623,7 @@ function renderWheel(floatVal,q) {
   const p=(v-1)/4;
   const energy=Math.pow(p,1.7);
   document.body.style.setProperty('--ff-scale-glow', (.10+.88*energy).toFixed(3));
-  document.body.style.setProperty('--ff-scale-glow-zoom',(1+energy*.21).toFixed(3));
+  document.body.style.setProperty('--ff-scale-glow-zoom',(.62+p*.64).toFixed(3));
   document.body.style.setProperty('--ff-scale-wheel-glow',(.10+.85*energy).toFixed(3));
   const wheel=document.getElementById('refRuler');
   if(wheel) wheel.style.setProperty('--progress', (p*100)+'%');
@@ -4088,15 +4135,9 @@ function copyList() {
 }
 
 /* Share the public test URL, never a local file URL. */
+const PUBLIC_TEST_URL = 'https://vjv7f4fffb-ship-it.github.io/series-hunter2/';
 async function shareTest() {
-  if (location.protocol === 'file:' || location.protocol === 'about:') {
-    toast('После публикации на GitHub Pages здесь можно поделиться ссылкой');
-    return;
-  }
-  const url = new URL(location.href);
-  url.search = '';
-  url.hash = '';
-  const data = { title: 'Подбор сериалов по вкусу', text: 'Пройди тест и узнай свой тип зрителя', url: url.href };
+  const data = { title: 'Подбор сериалов по вкусу', text: 'Пройди тест и узнай свой тип зрителя', url: PUBLIC_TEST_URL };
   if (navigator.share) {
     try { await navigator.share(data); return; }
     catch (err) { if (err?.name === 'AbortError') return; }
@@ -4152,7 +4193,7 @@ document.addEventListener("click", e => {
       const cur = Array.isArray(S.ans[q.id]) ? S.ans[q.id].slice() : [];
       const at = cur.indexOf(i);
       if (at >= 0) cur.splice(at, 1); else { cur.push(i); if (q.max && cur.length > q.max) cur.shift(); }
-      S.ans[q.id] = cur; repaint(`[data-i="${i}"]`);
+      S.ans[q.id] = cur; syncChoiceSelection(q);
     }
   } else if (act === "lvl") {
     buzz(); const v = +b.dataset.i; S.ans[q.id] = v; updateScale(q, v);
@@ -4163,7 +4204,7 @@ document.addEventListener("click", e => {
     const at = cur.indexOf(id); if (at >= 0) cur.splice(at, 1); else cur.push(id);
     S.ans[q.id] = cur;
     if (q.role === "liked" && Array.isArray(S.ans.disliked)) S.ans.disliked = S.ans.disliked.filter(x => !cur.includes(x));
-    repaintChips(`[data-id="${id}"]`);
+    syncChoiceSelection(q);
   }
 });
 document.addEventListener('keydown',e=>{
